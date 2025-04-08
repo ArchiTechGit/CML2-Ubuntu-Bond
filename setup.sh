@@ -45,4 +45,6 @@ systemctl daemon-reload
 systemctl enable fixbond.service
 service fixbond start
 
+# Display Bonding Information
+cat /proc/net/bonding/bond0
 
