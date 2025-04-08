@@ -20,7 +20,7 @@ ip link set ens4 up
 netplan apply
 #
 cat /proc/net/bonding/bond0
-EOF 
+EOF
 
 chmod +x fixbond.sh
 
@@ -35,12 +35,14 @@ ExecStart=/opt/fixbond/fixbond.sh
 
 [Install]
 WantedBy=default.target
-EOF 
+EOF
+
 chmod 664 /etc/systemd/system/fixbond.service
 chown root:root /etc/systemd/system/fixbond.service
 
 # Reload and enable service
 systemctl daemon-reload
 systemctl enable fixbond.service
+service fixbond start
 
 
