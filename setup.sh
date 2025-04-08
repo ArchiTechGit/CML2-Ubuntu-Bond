@@ -1,7 +1,14 @@
 #/!/bin/sh
 
 # Create shell script
-mkdir /opt/fixbond && cd /opt/fixbond
+
+if test -d /opt/fixbond; then
+  echo "Directory exists."
+else
+  echo "Directory does not exist. Creating directory."
+  mkdir /opt/fixbond
+fi
+
 echo <<EOF > fixbond.sh
 ip link set ens3 down
 ip link set ens4 down
