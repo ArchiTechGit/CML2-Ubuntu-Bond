@@ -8,8 +8,9 @@ else
   echo "Directory does not exist. Creating directory."
   mkdir /opt/fixbond
 fi
-
-echo <<EOF > fixbond.sh
+cd /opt/fixbond/
+cat <<EOF > fixbond.sh
+#!/bin/sh
 ip link set ens3 down
 ip link set ens4 down
 ethtool -s ens3 autoneg off speed 1000 duplex full
@@ -24,7 +25,8 @@ EOF
 chmod +x fixbond.sh
 
 # Create service to run on boot
-echo <<EOF > /etc/systemd/system/fixbond.service
+cd /etc/systemd/system/
+cat <<EOF > /etc/systemd/system/fixbond.service
 [Unit]
 After=network.target
 
