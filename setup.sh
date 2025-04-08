@@ -1,10 +1,8 @@
 #/!/bin/sh
 
-
 # Create shell script
 mkdir /opt/fixbond && cd /opt/fixbond
-touch fixbond.sh
-echo <<EOF
+echo <<EOF > fixbond.sh
 ip link set ens3 down
 ip link set ens4 down
 ethtool -s ens3 autoneg off speed 1000 duplex full
@@ -14,13 +12,12 @@ ip link set ens4 up
 netplan apply
 #
 cat /proc/net/bonding/bond0
-EOF > fixbond.sh
+EOF 
 
 chmod +x fixbond.sh
 
 # Create service to run on boot
-touch /etc/systemd/system/fixbond.service 
-echo <<EOF
+echo <<EOF > /etc/systemd/system/fixbond.service
 [Unit]
 After=network.target
 
@@ -29,7 +26,7 @@ ExecStart=/opt/fixbond/fixbond.sh
 
 [Install]
 WantedBy=default.target
-EOF > /etc/systemd/system/fixbond.service
+EOF 
 chmod 664 /etc/systemd/system/fixbond.service
 chown root:root /etc/systemd/system/fixbond.service
 
