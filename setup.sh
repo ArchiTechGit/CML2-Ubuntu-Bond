@@ -18,8 +18,6 @@ ethtool -s ens4 autoneg off speed 1000 duplex full
 ip link set ens3 up
 ip link set ens4 up
 netplan apply
-#
-cat /proc/net/bonding/bond0
 EOF
 
 chmod +x fixbond.sh
